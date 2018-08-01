@@ -1,0 +1,16 @@
+library(ggplot2)
+business_data = read.csv(file="/home/pradeepburugu/Documents/Project/R/business.csv")
+ggplot(business_data) + geom_bar(aes(x=state),fill ="gray")
+ggplot(business_data) + geom_bar(aes(x=stars),fill ="gray")
+ggplot(data=business_data,aes(x=factor(1),fill=factor(stars))) + geom_bar(width = 1) + coord_polar(theta = "y")
+user_data = read.csv(file="/home/pradeepburugu/Documents/Project/R/user.csv")
+user_votes = user_data[,c("cool_votes","funny_votes","useful_votes")]
+cor(user_data$funny_votes,user_data$fans)
+my.lm = lm(useful_votes ~ review_count + fans, data = user_data)
+coeffs = coefficients(my.lm)
+coeffs
+ggplot(user_data) + geom_bar(aes(x=review_count),fill ='gray')
+userCluster = kmeans(user_data[,(3,11)],3)
+userCluster = kmeans(user_data[,c(3,11)],3)
+ggplot(user_data,aes(review_count,fans,color =userCluster$cluster)) + geom_point()
+ggplot(user_data,aes(review_count,fans,color=userCluster$cluster)) + geom_point()
